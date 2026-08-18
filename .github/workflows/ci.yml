@@ -43,3 +43,6 @@ jobs: # list of jobs that make up the workflow.
 
       - name: Run style check
         run: npm run format:check
+
+      - name: Run lint check
+        run: npm run lint
