@@ -1,0 +1,26 @@
+name: ci # human readable name for the workflow
+
+on: # specifies when the workflow should run
+  pull_request:
+    branches: [main]
+
+jobs: # list of jobs that make up the workflow.
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest # specifies the type of runner(machine) to used
+
+    steps: # list of steps that make up the jops.
+      - name: Check out code
+        uses: actions/checkout@v6 # clone the repository into the runner (pre-built actions)
+        # uses -> which action to use
+
+      - name: Set up Node
+        uses: actions/setup-node@v5 # pre-built setup-node action to configure a Node environment for use in workflows.
+        with: #  specifies the inputs to the action.
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm ci # "clean-install", and is helpful in automated environments so we can be sure we get a clean install every time.
+
+      - name: Run test
+        run: npm run test
