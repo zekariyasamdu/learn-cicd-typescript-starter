@@ -25,8 +25,8 @@ jobs: # list of jobs that make up the workflow.
       - name: Run test
         run: npm run test
 
-  styles:
-    name: Styles
+  style:
+    name: Style
     runs-on: ubuntu-latest
 
     steps:
