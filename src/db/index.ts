@@ -1,7 +1,6 @@
 import { drizzle } from "drizzle-orm/libsql";
 import { config } from "../config.js";
-import * as schema from "./schema.js";
-
+import * as schema from "./schemas.js";
 let conn = undefined;
 
 if (config.db.url) {

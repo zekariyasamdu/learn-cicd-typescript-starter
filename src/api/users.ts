@@ -3,7 +3,7 @@ import crypto from "crypto";
 import { v4 as uuidv4 } from "uuid";
 import { respondWithError, respondWithJSON } from "./json.js";
 import { createUser, getUser } from "../db/queries/users.js";
-import { User } from "../db/schema.js";
+import { User } from "../db/schemas.js";
 
 export async function handlerUsersCreate(req: Request, res: Response) {
   try {

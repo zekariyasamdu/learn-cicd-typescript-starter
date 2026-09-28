@@ -1,28 +1,21 @@
 ![alt text goes here](https://github.com/zekariyasamdu/learn-cicd-typescript-starter/actions/workflows/ci.yml/badge.svg)
 
-# learn-cicd-typescript-starter (Notely)
+# Note
 
-This repo contains the typescript starter code for the "Notely" application for the "Learn CICD" course on [Boot.dev](https://boot.dev).
+- Build the Docker image locally:
 
-## Local Development
-
-Make sure you're on Node version 22+.
-
-Create a `.env` file in the root of the project with the following contents:
-
-```bash
-PORT="8080"
+```cmd
+docker build -t DOCKERHUB_NAMESPACE/notely:latest .
 ```
 
-Run the server:
+- Run the Docker image locally
 
-```bash
-npm install
-npm run dev
+```cmd
+docker run -e PORT=8080 -p 8080:8080 DOCKERHUB_NAMESPACE/notely:latest
 ```
 
-_This starts the server in non-database mode._ It will serve a simple webpage at `http://localhost:8080`.
+- Build and push the Docker image to google's Artifact Registry:
 
-You do _not_ need to set up a database or any interactivity on the webpage yet. Instructions for that will come later in the course!
-
-zekariyas version of Boot.dev's Notely app.
+```cmd
+gcloud builds submit --tag REGION-docker.pkg.dev/PROJECT_ID/REPOSITORY/IMAGE:TAG .
+```

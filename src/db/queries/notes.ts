@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { db, assertDbConnection } from "../index.js";
-import { notesTable, NewNote } from "../schema.js";
+import { notesTable, NewNote } from "../schemas.js";
 
 export async function createNote(note: NewNote) {
   assertDbConnection();
