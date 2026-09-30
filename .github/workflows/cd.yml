@@ -8,6 +8,8 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
     steps:
       - name: checkout
@@ -24,16 +26,19 @@ jobs:
       - name: build
         run: npm run build
 
-      - id: "auth"
+      - id: auth
         uses: google-github-actions/auth@v2
         with:
           credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
 
-      - name: "Set up Cloud SDK"
+      - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v3
 
-      - name: "push to Artifact Registry"
+      - name: push to Artifact Registry
         run: gcloud builds submit --tag us-central1-docker.pkg.dev/zach-training-area/notely-ar-repo/notely:latest .
+
+      - name: DB migration
+        run: npm run db:migrate
 
       - name: Deploy to Cloud Run
         run: >
